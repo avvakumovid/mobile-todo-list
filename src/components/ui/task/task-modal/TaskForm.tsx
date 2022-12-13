@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { ITask } from '@/shared/types'
@@ -41,6 +41,9 @@ const TaskForm = () => {
       <Field<ITask>
         name='task'
         control={control}
+        rules={{
+          required: `Field can't be Empty`,
+        }}
         placeholder='Enter new task'
         placeholderTextColor={'#cbd7fb'}
         selectionColor={'#cbd7fb'}
@@ -51,12 +54,12 @@ const TaskForm = () => {
         <RippleButton
           color='#096bff'
           borderColor='#096bff'
-          width={135}
-          icon='chevron-up'
-          text='New task'
           className='self-end z-1'
           onTap={handleSubmit(onSubmit)}
-        />
+          width={75}
+        >
+          <Text className='text-blue-200 uppercase'>Add</Text>
+        </RippleButton>
       </View>
     </>
   )
