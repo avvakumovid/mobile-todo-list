@@ -1,13 +1,22 @@
+import cn from 'clsx'
 import React, { FC } from 'react'
-import { Text, View } from 'react-native'
+import { StyleProp, Text, TextProps, View } from 'react-native'
 
 interface ILable {
   text: string
+  className?: string
+  style?: StyleProp<TextProps>
 }
 
-const Label: FC<ILable> = ({ text }) => {
+const Label: FC<ILable> = ({ text, className, style }) => {
   return (
-    <Text className='uppercase text-xs tracking-widest text-gray-200 mb-2'>
+    <Text
+      className={cn(
+        'uppercase text-xs tracking-widest text-gray-200 mb-2',
+        className
+      )}
+      style={style}
+    >
       {text}
     </Text>
   )

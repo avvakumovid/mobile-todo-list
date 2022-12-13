@@ -39,7 +39,7 @@ export const Calendar: FC<ICalendar> = ({ setFromData }) => {
         width={115}
         borderColor='#cbd7fb'
         text={getShortDate(selectedDay)}
-        className='my-2'
+        className='mb-2'
       />
       {isShow && (
         <Animated.View

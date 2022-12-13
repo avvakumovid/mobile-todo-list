@@ -7,6 +7,7 @@ import { ICategory, ITask } from '@/shared/types'
 import RippleButton from '../../button/RippleButton'
 import { Calendar } from '../../calendar/Calendar'
 import Field from '../../form-elements/field/Field'
+import Label from '../../label/Label'
 import Select from '../../select/Select'
 
 import { useTypedNavigation } from './../../../../hooks/useTypedNavigate'
@@ -39,6 +40,7 @@ const TaskForm = () => {
 
   return (
     <>
+      <Label text='Task' />
       <Field<ITask>
         name='task'
         control={control}
@@ -51,7 +53,9 @@ const TaskForm = () => {
         cursorColor={'#cbd7fb'}
       />
 
+      <Label text='Time' className='mt-4' />
       <Calendar setFromData={setValue} />
+      <Label text='Category' className='mt-4' />
       <Select<ICategory>
         data={data}
         render={item => (
@@ -68,6 +72,7 @@ const TaskForm = () => {
             <Text className='text-base ml-2 text-black'>{item.name}</Text>
           </View>
         )}
+        setValue={setValue}
       />
 
       <View className='mt-44'>

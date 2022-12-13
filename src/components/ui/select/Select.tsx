@@ -8,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { UseFormSetValue } from 'react-hook-form'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Animated, {
   measure,
@@ -17,21 +18,26 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 
+import { ICategory, ITask } from '@/shared/types'
+
 interface IKey {
   key: string
 }
 interface ISelect<T> {
   data: T[]
   render: (item: T) => JSX.Element
+  setValue: UseFormSetValue<ITask>
 }
 
-const Select = <T,>({ data, render }: ISelect<T>) => {
+const Select = <T,>({ data, render, setValue }: ISelect<T>) => {
   const [selected, setSelected] = useState<T>(data[0])
+
   const [items, setItems] = useState(data)
   const [h, setH] = useState(0)
   let height = useSharedValue(0)
   useEffect(() => {
     setItems(data.filter(item => item !== selected))
+    setValue('category', selected as ICategory)
   }, [selected])
   const styleHeight = useAnimatedStyle(() => ({
     height: height.value,
