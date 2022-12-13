@@ -21,6 +21,7 @@ const Navigation = () => {
           sceneContainerStyle: {
             backgroundColor: '#1b2b59',
           },
+          unmountOnBlur: true,
         }}
         initialRouteName='Main'
         drawerContent={props => <DrawerContent {...props} />}
