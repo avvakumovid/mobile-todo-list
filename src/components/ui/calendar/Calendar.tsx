@@ -45,7 +45,7 @@ export const Calendar: FC<ICalendar> = ({ setFromData }) => {
         <Animated.View
           entering={SlideInLeft}
           exiting={SlideOutRight}
-          className='bg-white-200 absolute z-10 top-20 left-0 right-0 bottom-0 '
+          className='bg-white-200 absolute z-30 top-20 left-0 right-0 bottom-0 '
         >
           <Button
             icon='x'

@@ -18,6 +18,34 @@ export const data: ICategoriesItem[] = [
         progress: 0.2,
         color: '#096bff',
     },
+    {
+        id: '3',
+        count: 18,
+        name: '2ff211',
+        progress: 0.2,
+        color: '#2ff211',
+    },
+    {
+        id: '4',
+        count: 18,
+        name: 'd44211',
+        progress: 0.2,
+        color: '#d44211',
+    },
+    {
+        id: '5',
+        count: 18,
+        name: '896bff',
+        progress: 0.2,
+        color: '#896bff',
+    },
+    {
+        id: '6',
+        count: 18,
+        name: 'personal',
+        progress: 0.2,
+        color: '#e96bff',
+    },
 ]
 export const tasks: ITask[] = [
     {

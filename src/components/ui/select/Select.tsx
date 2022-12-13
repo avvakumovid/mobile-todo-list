@@ -1,243 +1,85 @@
 import { Feather } from '@expo/vector-icons'
-import React, { useState } from 'react'
+import React, {
+  FC,
+  JSXElementConstructor,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Animated, {
+  measure,
+  useAnimatedRef,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
 
-const Select = () => {
-  const [isShow, setIsShow] = useState(false)
-  const [selected, setSelected] = useState('item-1')
+interface IKey {
+  key: string
+}
+interface ISelect<T> {
+  data: T[]
+  render: (item: T) => JSX.Element
+}
 
+const Select = <T,>({ data, render }: ISelect<T>) => {
+  const [selected, setSelected] = useState<T>(data[0])
+  const [items, setItems] = useState(data)
+  const [h, setH] = useState(0)
+  let height = useSharedValue(0)
+  useEffect(() => {
+    setItems(data.filter(item => item !== selected))
+  }, [selected])
   const styleHeight = useAnimatedStyle(() => ({
-    height: withTiming(isShow ? 160 : 0),
+    height: height.value,
   }))
+
   return (
     <View>
       <Pressable
+        className='z-20 bg-white-200'
         onPress={() => {
-          setIsShow(!isShow)
+          height.value = withTiming(height.value === 0 ? h * 4 + 16 : 0)
         }}
-        className='w-full h-10 z-20 flex-row justify-between items-center border border-gray rounded-lg  px-4'
       >
-        <Text>{selected}</Text>
-        <Feather name='chevron-down' size={22} />
+        {render(selected)}
       </Pressable>
+
       <Animated.View
-        className='mt-9'
         style={[
-          StyleSheet.absoluteFill,
+          StyleSheet.absoluteFillObject,
           styleHeight,
           {
             zIndex: 10,
           },
         ]}
       >
-        <Animated.ScrollView
-          showsVerticalScrollIndicator={false}
-          className='rounded-b-2xl'
-        >
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
+        <ScrollView className='h-80' showsVerticalScrollIndicator={false}>
+          <View
+            onLayout={e => {
+              setH(e.nativeEvent.layout.height)
             }}
-            className='w-[97%] h-10 border-b border-gray bg-white-200 flex-row justify-between items-center px-4'
+            collapsable={false}
+            className='z-20 bg-white-200 -mt-1 mb-2'
           >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-2')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  bg-white-200 flex-row justify-between items-center    px-4'
-          >
-            <Text>item-2</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray bg-white-200  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              setSelected('item-1')
-              setIsShow(false)
-            }}
-            className='w-[97%] h-10 border-b border-gray  flex-row justify-between items-center px-4'
-          >
-            <Text>item-1</Text>
-          </Pressable>
-        </Animated.ScrollView>
+            {render(selected)}
+          </View>
+          {items.map((item, index) => (
+            <Pressable
+              key={index}
+              className='mb-1'
+              onPress={() => {
+                setSelected(item)
+                height.value = withTiming(0)
+              }}
+            >
+              {render(item)}
+            </Pressable>
+          ))}
+        </ScrollView>
       </Animated.View>
     </View>
   )

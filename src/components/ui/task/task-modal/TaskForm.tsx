@@ -2,11 +2,12 @@ import { useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
-import { ITask } from '@/shared/types'
+import { ICategory, ITask } from '@/shared/types'
 
 import RippleButton from '../../button/RippleButton'
 import { Calendar } from '../../calendar/Calendar'
 import Field from '../../form-elements/field/Field'
+import Select from '../../select/Select'
 
 import { useTypedNavigation } from './../../../../hooks/useTypedNavigate'
 import { data } from './../../../../store/slices/task.slice'
@@ -49,7 +50,26 @@ const TaskForm = () => {
         selectionColor={'#cbd7fb'}
         cursorColor={'#cbd7fb'}
       />
+
       <Calendar setFromData={setValue} />
+      <Select<ICategory>
+        data={data}
+        render={item => (
+          <View
+            key={item.name}
+            className=' h-10 w-32  flex-row rounded-full justify-start px-2 items-center border-2 border-gray'
+          >
+            <View
+              className='w-6 h-6 rounded-full'
+              style={{
+                backgroundColor: item.color,
+              }}
+            ></View>
+            <Text className='text-base ml-2 text-black'>{item.name}</Text>
+          </View>
+        )}
+      />
+
       <View className='mt-44'>
         <RippleButton
           color='#096bff'
