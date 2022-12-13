@@ -33,6 +33,7 @@ import Animated, {
 import { useDispatch } from 'react-redux'
 
 import Button from '../button/Button'
+import RippleButton from '../button/RippleButton'
 
 import { ITask } from './../../../shared/types'
 import { AppDispatch } from '@/store'
@@ -181,7 +182,12 @@ const TaskItem: FC<ITaskItem> = ({
               </Animated.View>
             </Animated.View>
           </Button>
-          <Pressable onPress={() => {}} className='ml-5 w-[85%] '>
+          <Pressable
+            onPress={() => {
+              console.log('ew')
+            }}
+            className='ml-5 w-[85%] '
+          >
             <Animated.Text
               style={text}
               numberOfLines={1}
@@ -201,16 +207,18 @@ const TaskItem: FC<ITaskItem> = ({
           <Feather name='trash-2' color={'#cbd7fb'} size={20} />
           <Text className='text-base text-gray ml-4'>The task was deleted</Text>
         </View>
-        <Pressable
-          className='border-2 rounded-2xl py-0.5 border-gray/[0.5]'
-          onPress={() => {
-            setTimeout(() => {
-              dispatch(removeTask(id))
-            }, 1000)
+
+        <RippleButton
+          onTap={() => {
+            clearTimeout(timer)
+            x.value = withTiming(0)
           }}
+          borderColor='#cbd7fb'
+          width={70}
+          height={30}
         >
           <Text className='text-sm text-black font-medium px-2.5'>UNDO</Text>
-        </Pressable>
+        </RippleButton>
       </View>
     </Animated.View>
   )
