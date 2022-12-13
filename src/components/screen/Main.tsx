@@ -1,11 +1,23 @@
-import { Text } from 'react-native'
+import { DrawerScreenProps } from '@react-navigation/drawer'
+import { FC } from 'react'
+import { Text } from 'react-native';
+import { useSelector } from 'react-redux'
 
+import CategoriesList from '../ui/categories/CategoriesList'
 import Layout from '../ui/layout/Layout'
+import TasksList from '../ui/task/TasksList'
 
-const Main = () => {
+import { RootState } from '@/store'
+
+const Main: FC<DrawerScreenProps<any>> = ({ navigation }) => {
+  const { tasks, categories } = useSelector((state: RootState) => state.task)
   return (
-    <Layout>
-      <Text className='text-red-300'>asasddMain</Text>
+    <Layout isPlusButton navigation={navigation}>
+      <Text className='text-3xl text-black font-medium mb-4'>
+        What's up, Olivia!
+      </Text>
+      <CategoriesList categories={categories} />
+      <TasksList tasks={tasks} />
     </Layout>
   )
 }

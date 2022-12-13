@@ -5,10 +5,12 @@ import NewTask from './../components/screen/NewTask';
 export const routes: IRoute[] = [
     {
         name: 'Main',
-        component: Main
+        component: Main,
+        icon: 'airplay'
     },
     {
         name: 'New Task',
-        component: NewTask
+        component: NewTask,
+        icon: 'trash'
     },
 ]
