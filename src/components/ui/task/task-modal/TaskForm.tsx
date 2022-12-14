@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
@@ -15,6 +15,14 @@ import { data } from './../../../../store/slices/task.slice'
 import { AppDispatch } from '@/store'
 import { addTask } from '@/store/slices/task.slice'
 
+const defaultValues = {
+  task: '',
+  date: new Date().toString(),
+  category: data[0],
+  id: Math.random().toString(),
+  isDone: false,
+}
+
 const TaskForm = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { goBack } = useTypedNavigation()
@@ -23,18 +31,15 @@ const TaskForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<ITask>({
-    defaultValues: {
-      task: '',
-      date: new Date().toString(),
-      category: data[0],
-      id: Math.random().toString(),
-      isDone: false,
-    },
+    defaultValues,
   })
 
   const onSubmit = (data: ITask) => {
+    data.date = Math.random().toString()
     dispatch(addTask(data))
+    reset(defaultValues)
     goBack()
   }
 
@@ -56,23 +61,30 @@ const TaskForm = () => {
       <Label text='Time' className='mt-4' />
       <Calendar setFromData={setValue} />
       <Label text='Category' className='mt-4' />
-      <Select<ICategory>
-        data={data}
-        render={item => (
-          <View
-            key={item.name}
-            className=' h-10 w-32  flex-row rounded-full justify-start px-2 items-center border-2 border-gray'
-          >
-            <View
-              className='w-6 h-6 rounded-full'
-              style={{
-                backgroundColor: item.color,
-              }}
-            ></View>
-            <Text className='text-base ml-2 text-black'>{item.name}</Text>
-          </View>
+      <Controller
+        control={control}
+        name={'category'}
+        render={({ field: { value, onChange, onBlur } }) => (
+          <Select<ICategory>
+            data={data}
+            onChange={onChange}
+            render={item => (
+              <View
+                key={item.name}
+                className=' h-10 w-32  flex-row rounded-full justify-start px-2 items-center border-2 border-gray'
+              >
+                <View
+                  className='w-6 h-6 rounded-full'
+                  style={{
+                    backgroundColor: item.color,
+                  }}
+                ></View>
+                <Text className='text-base ml-2 text-black'>{item.name}</Text>
+              </View>
+            )}
+            value={value}
+          />
         )}
-        setValue={setValue}
       />
 
       <View className='mt-44'>

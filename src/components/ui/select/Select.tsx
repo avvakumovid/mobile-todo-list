@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { UseFormSetValue } from 'react-hook-form'
+import { Noop, UseFormSetValue } from 'react-hook-form'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Animated, {
   measure,
@@ -26,23 +26,23 @@ interface IKey {
 interface ISelect<T> {
   data: T[]
   render: (item: T) => JSX.Element
-  setValue: UseFormSetValue<ITask>
+  value: T
+  onChange: (...event: any[]) => void
 }
 
-const Select = <T,>({ data, render, setValue }: ISelect<T>) => {
-  const [selected, setSelected] = useState<T>(data[0])
-
+const Select = <T,>({ data, render, value, onChange }: ISelect<T>) => {
+  const [selected, setSelected] = useState<T>(value)
+  render
   const [items, setItems] = useState(data)
   const [h, setH] = useState(0)
   let height = useSharedValue(0)
-  useEffect(() => {
-    setItems(data.filter(item => item !== selected))
-    setValue('category', selected as ICategory)
-  }, [selected])
   const styleHeight = useAnimatedStyle(() => ({
     height: height.value,
   }))
-
+  useEffect(() => {
+    setSelected(value)
+    setItems(data.filter(item => (item as ICategory) !== (value as ICategory)))
+  }, [value])
   return (
     <View>
       <Pressable
@@ -78,7 +78,8 @@ const Select = <T,>({ data, render, setValue }: ISelect<T>) => {
               key={index}
               className='mb-1'
               onPress={() => {
-                setSelected(item)
+                onChange(item)
+
                 height.value = withTiming(0)
               }}
             >
