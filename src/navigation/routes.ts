@@ -1,13 +1,19 @@
 import Main from '../components/screen/Main';
 import { IRoute } from './navigation.types';
 import NewTask from './../components/screen/NewTask';
+import Category from './../components/screen/Category';
 
 
 export const DrawerRoute: IRoute[] = [
     {
         name: 'Main',
         component: Main,
-        icon: 'airplay'
+        icon: 'home'
+    },
+    {
+        name: 'Category',
+        component: Category,
+        icon: 'archive'
     },
 ]
 
@@ -17,6 +23,12 @@ export const routes: IRoute[] = [
     {
         name: 'New Task',
         component: NewTask,
-        icon: 'trash'
+        icon: 'activity'
     },
+    {
+        name: 'Task',
+        component: NewTask,
+        icon: 'activity'
+    },
+
 ]

@@ -15,7 +15,7 @@ export interface ITask {
     date: string
 }
 
-export interface ICategoriesItem {
+export interface ITasksByCategoryItem {
     id: string,
     count: number
     name: string

@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { Feather } from '@expo/vector-icons';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import { TypeFeatherIconNames } from '@/shared/types';
 
 export type TypeRootStackParamList = {
     Main: undefined,
     ['New Task']: undefined
-    ['Create Task']: undefined
+    Task: undefined
+    Category: undefined
 }
 
 export interface IRoute {

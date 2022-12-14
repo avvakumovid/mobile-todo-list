@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICategoriesItem, ICategory, ITask } from './../../shared/types';
+import { ICategory, ITask, ITasksByCategoryItem } from './../../shared/types';
 
 const date = new Date().toString()
 
-export const data: ICategoriesItem[] = [
+export const data: ITasksByCategoryItem[] = [
     {
         id: '1',
         count: 40,
@@ -65,7 +65,7 @@ export const tasks: ITask[] = [
 ]
 export interface TaskState {
     tasks: ITask[]
-    categories: ICategoriesItem[]
+    categories: ITasksByCategoryItem[]
 }
 
 const initialState: TaskState = {

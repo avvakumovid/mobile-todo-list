@@ -1,19 +1,19 @@
 import React, { FC } from 'react'
 import { FlatList, Text, View } from 'react-native'
 
-import { ICategoriesItem } from '@/shared/types'
+import { ITasksByCategoryItem } from '@/shared/types'
 
-import Label from '../label/Label'
+import Label from '../../label/Label'
 
-import CategoriesItem from './CategoriesItem'
+import TasksByCategoryItem from './TasksByCategoryItem'
 
 interface ICategoriesList {
-  categories: ICategoriesItem[]
+  categories: ITasksByCategoryItem[]
 }
 
-const CategoriesList: FC<ICategoriesList> = ({ categories }) => {
-  const renderItem = ({ item }: { item: ICategoriesItem }) => (
-    <CategoriesItem {...item} />
+const TaskListByCategory: FC<ICategoriesList> = ({ categories }) => {
+  const renderItem = ({ item }: { item: ITasksByCategoryItem }) => (
+    <TasksByCategoryItem {...item} />
   )
   return (
     <View className='mb-4'>
@@ -29,4 +29,4 @@ const CategoriesList: FC<ICategoriesList> = ({ categories }) => {
   )
 }
 
-export default CategoriesList
+export default TaskListByCategory

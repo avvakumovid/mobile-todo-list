@@ -1,17 +1,21 @@
 import React, { FC } from 'react'
 import { Text, View } from 'react-native'
 import * as Progress from 'react-native-progress'
+import Animated, { FadeIn } from 'react-native-reanimated'
 
-import { ICategoriesItem } from '@/shared/types'
+import { ITasksByCategoryItem } from '@/shared/types'
 
-const CategoriesItem: FC<ICategoriesItem> = ({
+const TasksByCategoryItem: FC<ITasksByCategoryItem> = ({
   count,
   name,
   progress,
   color,
 }) => {
   return (
-    <View className='w-32 h-20 bg-white rounded-xl p-4 px-2  items-start justify-between mr-2'>
+    <Animated.View
+      entering={FadeIn}
+      className='w-32 h-20 bg-white rounded-xl p-4 px-2  items-start justify-between mr-2'
+    >
       <Text className='text-xs text-gray-200 -mb-1'>{count} tasks</Text>
       <Text className='text-base text-black capitalize'>{name}</Text>
       <Progress.Bar
@@ -23,8 +27,8 @@ const CategoriesItem: FC<ICategoriesItem> = ({
         borderRadius={20}
         color={color}
       />
-    </View>
+    </Animated.View>
   )
 }
 
-export default CategoriesItem
+export default TasksByCategoryItem

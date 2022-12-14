@@ -1,9 +1,9 @@
 import { DrawerScreenProps } from '@react-navigation/drawer'
 import { FC } from 'react'
-import { Text } from 'react-native';
+import { Text } from 'react-native'
 import { useSelector } from 'react-redux'
 
-import CategoriesList from '../ui/categories/CategoriesList'
+import CategoriesList from '../ui/categories/tasks-by-category/TaskListByCategory'
 import Layout from '../ui/layout/Layout'
 import TasksList from '../ui/task/TasksList'
 
