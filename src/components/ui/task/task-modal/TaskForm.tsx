@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { ICategory, ITask } from '@/shared/types'
+
+import { getShortDate } from '@/utils/getShortDate'
 
 import RippleButton from '../../button/RippleButton'
 import { Calendar } from '../../calendar/Calendar'
@@ -25,6 +28,7 @@ const defaultValues = {
 
 const TaskForm = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const [isShowCalendar, setIsShowCalendar] = useState(false)
   const { goBack } = useTypedNavigation()
   const {
     control,
@@ -45,7 +49,6 @@ const TaskForm = () => {
 
   return (
     <>
-      <Label text='Task' />
       <Field<ITask>
         name='task'
         control={control}
@@ -57,34 +60,55 @@ const TaskForm = () => {
         selectionColor={'#cbd7fb'}
         cursorColor={'#cbd7fb'}
       />
-
-      <Label text='Time' className='mt-4' />
-      <Calendar setFromData={setValue} />
-      <Label text='Category' className='mt-4' />
-      <Controller
-        control={control}
-        name={'category'}
-        render={({ field: { value, onChange, onBlur } }) => (
-          <Select<ICategory>
-            data={data}
-            onChange={onChange}
-            render={item => (
-              <View
-                key={item.name}
-                className=' h-10 w-32  flex-row rounded-full justify-start px-2 items-center border-2 border-gray'
-              >
+      <View className='flex-row justify-around mt-3'>
+        <Controller
+          control={control}
+          name='date'
+          render={({ field: { value } }) => (
+            <RippleButton
+              onTap={() => {
+                setIsShowCalendar(!isShowCalendar)
+              }}
+              icon='calendar'
+              width={115}
+              borderColor='#cbd7fb'
+              text={getShortDate(new Date(value))}
+              className='mb-2'
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name={'category'}
+          render={({ field: { value, onChange, onBlur } }) => (
+            <Select<ICategory>
+              data={data}
+              onChange={onChange}
+              render={item => (
                 <View
-                  className='w-6 h-6 rounded-full'
-                  style={{
-                    backgroundColor: item.color,
-                  }}
-                ></View>
-                <Text className='text-base ml-2 text-black'>{item.name}</Text>
-              </View>
-            )}
-            value={value}
-          />
-        )}
+                  key={item.name}
+                  className=' h-10 w-32  flex-row rounded-full justify-start px-2 items-center border-2 border-gray'
+                >
+                  <View
+                    className='w-6 h-6 rounded-full'
+                    style={{
+                      backgroundColor: item.color,
+                    }}
+                  ></View>
+                  <Text numberOfLines={1} className='text-base ml-2 text-black'>
+                    {item.name}
+                  </Text>
+                </View>
+              )}
+              value={value}
+            />
+          )}
+        />
+      </View>
+      <Calendar
+        isShow={isShowCalendar}
+        setIsShow={setIsShowCalendar}
+        setFromData={setValue}
       />
 
       <View className='mt-44'>

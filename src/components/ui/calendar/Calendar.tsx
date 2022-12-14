@@ -1,4 +1,11 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { UseFormSetValue } from 'react-hook-form'
 import { View } from 'react-native'
 import { Calendar as Cal } from 'react-native-calendars'
@@ -20,27 +27,18 @@ import RippleButton from './../button/RippleButton'
 
 interface ICalendar {
   setFromData: UseFormSetValue<ITask>
+  isShow: boolean
+  setIsShow: Dispatch<SetStateAction<boolean>>
 }
 
-export const Calendar: FC<ICalendar> = ({ setFromData }) => {
+export const Calendar: FC<ICalendar> = ({ setFromData, isShow, setIsShow }) => {
   const [selectedDay, setSelectedDay] = useState<Date>(new Date())
   const { scaleStyle, setScale } = useScale()
-  const [isShow, setIsShow] = useState(false)
   useEffect(() => {
     setFromData('date', selectedDay.toString())
   }, [selectedDay])
   return (
     <>
-      <RippleButton
-        onTap={() => {
-          setIsShow(!isShow)
-        }}
-        icon='calendar'
-        width={115}
-        borderColor='#cbd7fb'
-        text={getShortDate(selectedDay)}
-        className='mb-2'
-      />
       {isShow && (
         <Animated.View
           entering={SlideInLeft}

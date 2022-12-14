@@ -40,8 +40,13 @@ const Select = <T,>({ data, render, value, onChange }: ISelect<T>) => {
     height: height.value,
   }))
   useEffect(() => {
+    height.value = withTiming(0)
     setSelected(value)
-    setItems(data.filter(item => (item as ICategory) !== (value as ICategory)))
+    setItems(
+      data.filter(
+        item => (item as ICategory).name !== (value as ICategory).name
+      )
+    )
   }, [value])
   return (
     <View>
