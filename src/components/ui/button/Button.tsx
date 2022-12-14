@@ -19,6 +19,7 @@ interface IButton extends PressableProps {
   color?: string
   bgSize?: number
   isShowBg?: boolean
+  size?: number
 }
 
 const Button: FC<PropsWithChildren<IButton>> = ({
@@ -28,6 +29,7 @@ const Button: FC<PropsWithChildren<IButton>> = ({
   children,
   onPress,
   bgSize = 40,
+  size = 20,
   isShowBg = true,
   ...rest
 }) => {
@@ -53,7 +55,7 @@ const Button: FC<PropsWithChildren<IButton>> = ({
         }
       }}
     >
-      {icon && <Feather name={icon} size={24} color={color} />}
+      {icon && <Feather name={icon} size={size} color={color} />}
 
       {isShowBg && (
         <Animated.View

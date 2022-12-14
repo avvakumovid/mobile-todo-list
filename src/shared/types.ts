@@ -19,6 +19,6 @@ export interface ITask {
 export interface ITasksByCategoryItem {
     id: string,
     count: number
-    categoryId: string
+    category: ICategory
     progress: number
 }

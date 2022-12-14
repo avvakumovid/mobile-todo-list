@@ -91,11 +91,18 @@ const TaskForm = () => {
                   className=' h-10 w-32  flex-row rounded-full justify-start px-2 items-center border-2 border-gray'
                 >
                   <View
-                    className='w-6 h-6 rounded-full'
+                    className='w-6 h-6 rounded-full justify-center items-center'
                     style={{
                       backgroundColor: item.color,
                     }}
-                  ></View>
+                  >
+                    <View
+                      className='w-5 h-5 rounded-full border-2 border-white'
+                      style={{
+                        backgroundColor: item.color,
+                      }}
+                    ></View>
+                  </View>
                   <Text numberOfLines={1} className='text-base ml-2 text-black'>
                     {item.name}
                   </Text>

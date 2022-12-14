@@ -7,9 +7,8 @@ import { ITasksByCategoryItem } from '@/shared/types'
 
 const TasksByCategoryItem: FC<ITasksByCategoryItem> = ({
   count,
-  name,
   progress,
-  color,
+  category: { color, name },
 }) => {
   return (
     <Animated.View

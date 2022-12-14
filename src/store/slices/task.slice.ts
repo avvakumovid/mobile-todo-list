@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ICategory, ITask, ITasksByCategoryItem } from './../../shared/types';
 import { categories } from './category.slice';
 
+
 const date = new Date().toString()
 
 export const data: ITasksByCategoryItem[] = [
@@ -9,37 +10,37 @@ export const data: ITasksByCategoryItem[] = [
         id: '1',
         count: 40,
         progress: 0.74,
-        categoryId: '1'
+        category: categories[0]
     },
     {
         id: '2',
         count: 18,
         progress: 0.2,
-        categoryId: '2'
+        category: categories[1]
     },
     {
         id: '3',
         count: 18,
         progress: 0.2,
-        categoryId: '3'
+        category: categories[3]
     },
     {
         id: '4',
         count: 18,
         progress: 0.2,
-        categoryId: '4'
+        category: categories[2]
     },
     {
         id: '5',
         count: 18,
         progress: 0.2,
-        categoryId: '5'
+        category: categories[5]
     },
     {
         id: '6',
         count: 18,
         progress: 0.2,
-        categoryId: '6'
+        category: categories[4]
     },
 ]
 export const tasks: ITask[] = [
