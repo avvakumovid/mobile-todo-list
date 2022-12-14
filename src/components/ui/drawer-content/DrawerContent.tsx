@@ -1,15 +1,11 @@
-import { Feather } from '@expo/vector-icons'
-import {
-  DrawerContentComponentProps,
-  useDrawerStatus,
-} from '@react-navigation/drawer'
-import React, { FC, useEffect } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { DrawerContentComponentProps } from '@react-navigation/drawer'
+import { FC } from 'react'
+import { Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { useTypedNavigation } from '@/hooks/useTypedNavigate'
 
-import { routes } from '../../../navigation/routes'
+import { DrawerRoute, routes } from '../../../navigation/routes'
 import Avatar from '../avatar/Avatar'
 import BigButton from '../button/BigButton'
 
@@ -33,7 +29,7 @@ const DrawerContent: FC<DrawerContentComponentProps> = ({ navigation }) => {
         <Text className='text-white text-3xl w-2/3 mb-6 font-medium'>
           Olivia Mitchell
         </Text>
-        {routes.map(route => (
+        {DrawerRoute.map(route => (
           <DrawerButton key={route.name} route={route} routeNames={'s'} />
         ))}
       </View>
