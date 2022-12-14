@@ -3,6 +3,7 @@ import { Feather } from '@expo/vector-icons';
 export type TypeFeatherIconNames = keyof typeof Feather.glyphMap
 
 export interface ICategory {
+    id: string
     name: string
     color: string
 }
@@ -18,7 +19,6 @@ export interface ITask {
 export interface ITasksByCategoryItem {
     id: string,
     count: number
-    name: string
+    categoryId: string
     progress: number
-    color: string
 }

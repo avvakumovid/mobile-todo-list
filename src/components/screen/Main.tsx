@@ -10,13 +10,15 @@ import TasksList from '../ui/task/TasksList'
 import { RootState } from '@/store'
 
 const Main: FC<DrawerScreenProps<any>> = ({ navigation }) => {
-  const { tasks, categories } = useSelector((state: RootState) => state.task)
+  const { tasks, taskByCategories } = useSelector(
+    (state: RootState) => state.task
+  )
   return (
     <Layout isPlusButton navigation={navigation}>
       <Text className='text-3xl text-black font-medium mb-4'>
         What's up, Olivia!
       </Text>
-      <CategoriesList categories={categories} />
+      <CategoriesList categories={taskByCategories} />
       <TasksList tasks={tasks} />
     </Layout>
   )

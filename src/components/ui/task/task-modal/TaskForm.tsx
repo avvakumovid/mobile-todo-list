@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { ICategory, ITask } from '@/shared/types'
 
@@ -15,18 +16,18 @@ import Select from '../../select/Select'
 
 import { useTypedNavigation } from './../../../../hooks/useTypedNavigate'
 import { data } from './../../../../store/slices/task.slice'
-import { AppDispatch } from '@/store'
+import { AppDispatch, RootState } from '@/store'
 import { addTask } from '@/store/slices/task.slice'
 
-const defaultValues = {
-  task: '',
-  date: new Date().toString(),
-  category: data[0],
-  id: Math.random().toString(),
-  isDone: false,
-}
-
 const TaskForm = () => {
+  const { categories } = useSelector((state: RootState) => state.category)
+  const [defaultValues] = useState({
+    task: '',
+    date: new Date().toString(),
+    category: categories[0],
+    id: Math.random().toString(),
+    isDone: false,
+  })
   const dispatch = useDispatch<AppDispatch>()
   const [isShowCalendar, setIsShowCalendar] = useState(false)
   const { goBack } = useTypedNavigation()
@@ -82,7 +83,7 @@ const TaskForm = () => {
           name={'category'}
           render={({ field: { value, onChange, onBlur } }) => (
             <Select<ICategory>
-              data={data}
+              data={categories}
               onChange={onChange}
               render={item => (
                 <View

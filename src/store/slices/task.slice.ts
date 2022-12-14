@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ICategory, ITask, ITasksByCategoryItem } from './../../shared/types';
+import { categories } from './category.slice';
 
 const date = new Date().toString()
 
@@ -7,57 +8,51 @@ export const data: ITasksByCategoryItem[] = [
     {
         id: '1',
         count: 40,
-        name: 'business',
         progress: 0.74,
-        color: '#bc2ac8',
+        categoryId: '1'
     },
     {
         id: '2',
         count: 18,
-        name: 'personal',
         progress: 0.2,
-        color: '#096bff',
+        categoryId: '2'
     },
     {
         id: '3',
         count: 18,
-        name: '2ff211',
         progress: 0.2,
-        color: '#2ff211',
+        categoryId: '3'
     },
     {
         id: '4',
         count: 18,
-        name: 'd44211',
         progress: 0.2,
-        color: '#d44211',
+        categoryId: '4'
     },
     {
         id: '5',
         count: 18,
-        name: '896bff',
         progress: 0.2,
-        color: '#896bff',
+        categoryId: '5'
     },
     {
         id: '6',
         count: 18,
-        name: 'personal',
         progress: 0.2,
-        color: '#e96bff',
+        categoryId: '6'
     },
 ]
 export const tasks: ITask[] = [
     {
         id: '3',
-        category: data[1],
+        category: categories[0],
         isDone: true,
         task: 'First view',
         date
     },
     {
         id: '5',
-        category: data[0],
+        category: categories[1],
         isDone: false,
         task: 'Second test task view Second test task view',
         date
@@ -65,12 +60,12 @@ export const tasks: ITask[] = [
 ]
 export interface TaskState {
     tasks: ITask[]
-    categories: ITasksByCategoryItem[]
+    taskByCategories: ITasksByCategoryItem[]
 }
 
 const initialState: TaskState = {
     tasks: tasks,
-    categories: data
+    taskByCategories: data
 }
 
 const taskSlice = createSlice({
