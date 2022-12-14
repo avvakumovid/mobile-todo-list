@@ -7,6 +7,7 @@ export type TypeRootStackParamList = {
     ['New Task']: undefined
     Task: undefined
     Category: undefined
+    Test: undefined
 }
 
 export interface IRoute {
