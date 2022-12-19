@@ -27,7 +27,7 @@ interface ISelect<T> {
   data: T[]
   render: (item: T) => JSX.Element
   value: T
-  onChange: (...event: any[]) => void
+  onChange?: (...event: any[]) => void
 }
 
 const Select = <T,>({ data, render, value, onChange }: ISelect<T>) => {
@@ -43,11 +43,10 @@ const Select = <T,>({ data, render, value, onChange }: ISelect<T>) => {
     height.value = withTiming(0)
     setSelected(value)
     setItems(
-      data.filter(
-        item => (item as ICategory).name !== (value as ICategory).name
-      )
+      data.filter(item => JSON.stringify(item) !== JSON.stringify(value))
     )
   }, [value])
+
   return (
     <View>
       <Pressable
@@ -83,7 +82,9 @@ const Select = <T,>({ data, render, value, onChange }: ISelect<T>) => {
               key={index}
               className='mb-1'
               onPress={() => {
-                onChange(item)
+                if (onChange) {
+                  onChange(item)
+                }
 
                 height.value = withTiming(0)
               }}

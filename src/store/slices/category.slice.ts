@@ -1,5 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ICategory } from '@/shared/types';
+import { colors } from '@/shared/colors';
+
 
 
 
@@ -11,32 +13,32 @@ export const categories: ICategory[] = [
     {
         id: '1',
         name: 'business',
-        color: '#bc2ac8',
+        color: colors[1],
     },
     {
         id: '2',
         name: 'personal',
-        color: '#096bff',
+        color: colors[28],
     },
     {
         id: '3',
         name: '2ff211',
-        color: '#2ff211',
+        color: colors[32],
     },
     {
         id: '4',
         name: 'd44211',
-        color: '#d44211',
+        color: colors[22],
     },
     {
         id: '5',
         name: '896bff',
-        color: '#896bff',
+        color: colors[40],
     },
     {
         id: '6',
         name: 'personal',
-        color: '#e96bff',
+        color: colors[7],
     },
 ]
 
@@ -48,11 +50,25 @@ const categorySlice = createSlice({
     name: 'category',
     initialState,
     reducers: {
+        editCategory(state, action: PayloadAction<ICategory>) {
+            let index = state.categories.findIndex(category => category.id === action.payload.id)
 
+            let categories = [...state.categories]
+            console.log(categories[index])
+
+            categories[index] = action.payload
+            state.categories = categories
+        },
+        removeCategory(state, action: PayloadAction<string>) {
+            state.categories = state.categories.filter(category => category.id !== action.payload)
+        },
+        addCategory(state, action: PayloadAction<ICategory>) {
+            state.categories = [...state.categories, action.payload]
+        }
     }
 })
 
 
 export default categorySlice.reducer
 
-export const { } = categorySlice.actions
+export const { editCategory, removeCategory, addCategory } = categorySlice.actions

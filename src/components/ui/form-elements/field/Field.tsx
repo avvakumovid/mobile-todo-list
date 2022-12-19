@@ -37,7 +37,7 @@ const Field = <T extends Record<string, any>>({
               {...rest}
             />
           </View>
-          {error && <Text className='text-red'>{error.message}</Text>}
+          <Text className='text-red'>{error?.message}</Text>
         </>
       )}
     />

@@ -155,9 +155,6 @@ const Test = () => {
     }
   })
   const onColorChange = useCallback((color: string | number) => {
-    if (typeof color == 'string') {
-      console.log(color)
-    }
     pickedColor.value = color
   }, [])
 
