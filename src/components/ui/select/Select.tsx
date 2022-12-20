@@ -57,7 +57,6 @@ const Select = <T,>({ data, render, value, onChange }: ISelect<T>) => {
       >
         {render(selected)}
       </Pressable>
-
       <Animated.View
         style={[
           StyleSheet.absoluteFillObject,

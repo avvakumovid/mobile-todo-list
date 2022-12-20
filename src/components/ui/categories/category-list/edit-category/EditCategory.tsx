@@ -32,7 +32,6 @@ const EditCategory: FC<IEditCategory> = ({ category, setIsShow }) => {
     if (isNew) {
       dispatch(addCategory(data))
     } else {
-      console.log(data, 'data')
       dispatch(editCategory(data))
       setIsShow(false)
     }

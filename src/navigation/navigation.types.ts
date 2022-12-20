@@ -5,7 +5,9 @@ import { TypeFeatherIconNames } from '@/shared/types';
 export type TypeRootStackParamList = {
     Main: undefined,
     ['New Task']: undefined
-    Task: undefined
+    Task: {
+        id: string
+    }
     Category: undefined
     Test: undefined
 }

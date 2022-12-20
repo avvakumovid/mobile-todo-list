@@ -1,29 +1,16 @@
 import { Feather } from '@expo/vector-icons'
 import cn from 'clsx'
-import React, { FC, useRef, useState } from 'react'
-import { Pressable, ScrollView, Text, View } from 'react-native'
-import {
-  Gesture,
-  GestureDetector,
-  PanGestureHandler,
-  PanGestureHandlerGestureEvent,
-} from 'react-native-gesture-handler'
+import { FC, useState } from 'react'
+import { Pressable, Text, View } from 'react-native'
+import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
-  BounceOutRight,
-  FadeIn,
-  FadeOut,
   Layout,
-  RollOutLeft,
-  RotateInDownLeft,
   SharedValue,
-  SlideOutLeft,
   SlideOutRight,
   ZoomIn,
-  ZoomOut,
   interpolate,
   interpolateColor,
   runOnJS,
-  useAnimatedGestureHandler,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -31,6 +18,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { useDispatch } from 'react-redux'
+
+import { useTypedNavigation } from '@/hooks/useTypedNavigate'
 
 import Button from '../button/Button'
 import RippleButton from '../button/RippleButton'
@@ -54,6 +43,7 @@ const TaskItem: FC<ITaskItem> = ({
   const dispatch = useDispatch<AppDispatch>()
   const [done, setDone] = useState(isDone)
   const [timer, setTimer] = useState<NodeJS.Timeout>()
+  const { navigate } = useTypedNavigation()
   const a = useDerivedValue(() => {
     return done ? withSpring(1) : withTiming(0)
   })
@@ -100,25 +90,6 @@ const TaskItem: FC<ITaskItem> = ({
     return {
       scaleX: withTiming(done ? 1 : 0),
     }
-  })
-  const handleGesture = useAnimatedGestureHandler<
-    PanGestureHandlerGestureEvent,
-    { x: number }
-  >({
-    onStart: (_, ctx) => {
-      ctx.x = x.value
-    },
-    onActive: ({ translationX }, ctx) => {
-      x.value = translationX
-    },
-    onEnd: _ => {
-      if (x.value <= -70) {
-        x.value = withTiming(-1000)
-        runOnJS(time)(x)
-      } else {
-        x.value = withTiming(0)
-      }
-    },
   })
 
   const pathAnimatedStyle = useAnimatedStyle(() => ({
@@ -184,7 +155,7 @@ const TaskItem: FC<ITaskItem> = ({
           </Button>
           <Pressable
             onPress={() => {
-              console.log('ew')
+              navigate('Task', { id: id })
             }}
             className='ml-5 w-[85%] '
           >

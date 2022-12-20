@@ -54,7 +54,6 @@ const categorySlice = createSlice({
             let index = state.categories.findIndex(category => category.id === action.payload.id)
 
             let categories = [...state.categories]
-            console.log(categories[index])
 
             categories[index] = action.payload
             state.categories = categories

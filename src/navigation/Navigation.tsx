@@ -23,7 +23,7 @@ const Navigation = () => {
           },
           //unmountOnBlur: true,
         }}
-        initialRouteName='Category'
+        initialRouteName='Main'
         drawerContent={props => <DrawerContent {...props} />}
       >
         {routes.map(route => (

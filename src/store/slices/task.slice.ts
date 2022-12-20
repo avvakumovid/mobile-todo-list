@@ -45,14 +45,14 @@ export const data: ITasksByCategoryItem[] = [
 ]
 export const tasks: ITask[] = [
     {
-        id: '3',
+        id: '1',
         category: categories[0],
         isDone: true,
         task: 'First view',
         date
     },
     {
-        id: '5',
+        id: '2',
         category: categories[1],
         isDone: false,
         task: 'Second test task view Second test task view',
@@ -78,13 +78,19 @@ const taskSlice = createSlice({
         },
         removeTask(state, action: PayloadAction<string>) {
             state.tasks = state.tasks.filter(task => task.id !== action.payload)
-        }
+        },
+        updateTask(state, action: PayloadAction<ITask>) {
+            let taskIndex = state.tasks.findIndex(task => task.id === action.payload.id)
+            let tasks = [...state.tasks]
+            tasks[taskIndex] = action.payload
+            state.tasks = tasks
+        },
     }
 })
 
 
 export default taskSlice.reducer
 
-export const { addTask, removeTask } = taskSlice.actions
+export const { addTask, removeTask, updateTask } = taskSlice.actions
 
 
