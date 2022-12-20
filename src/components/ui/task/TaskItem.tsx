@@ -26,7 +26,7 @@ import RippleButton from '../button/RippleButton'
 
 import { ITask } from './../../../shared/types'
 import { AppDispatch } from '@/store'
-import { removeTask } from '@/store/slices/task.slice'
+import { removeTask, toggleIsDoneTask } from '@/store/slices/task.slice'
 
 interface ITaskItem extends ITask {
   index: number
@@ -132,6 +132,7 @@ const TaskItem: FC<ITaskItem> = ({
             color={category?.color || '#cbd7fb'}
             onPress={() => {
               setDone(!done)
+              dispatch(toggleIsDoneTask(id))
             }}
           >
             <Animated.View

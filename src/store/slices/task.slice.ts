@@ -85,12 +85,18 @@ const taskSlice = createSlice({
             tasks[taskIndex] = action.payload
             state.tasks = tasks
         },
+        toggleIsDoneTask(state, action: PayloadAction<string>) {
+            let taskIndex = state.tasks.findIndex(task => task.id === action.payload)
+            let tasks = [...state.tasks]
+            tasks[taskIndex].isDone = !tasks[taskIndex].isDone
+            state.tasks = tasks
+        },
     }
 })
 
 
 export default taskSlice.reducer
 
-export const { addTask, removeTask, updateTask } = taskSlice.actions
+export const { addTask, removeTask, updateTask, toggleIsDoneTask } = taskSlice.actions
 
 
