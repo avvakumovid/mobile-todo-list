@@ -26,7 +26,11 @@ import RippleButton from '../button/RippleButton'
 
 import { ITask } from './../../../shared/types'
 import { AppDispatch } from '@/store'
-import { removeTask, toggleIsDoneTask } from '@/store/slices/task.slice'
+import {
+  groupTaskByCategory,
+  removeTask,
+  toggleIsDoneTask,
+} from '@/store/slices/task.slice'
 
 interface ITaskItem extends ITask {
   index: number
@@ -83,6 +87,7 @@ const TaskItem: FC<ITaskItem> = ({
   const time = async (x: SharedValue<number>) => {
     let timer = setTimeout(() => {
       dispatch(removeTask(id))
+      dispatch(groupTaskByCategory())
     }, 1000)
     setTimer(timer)
   }

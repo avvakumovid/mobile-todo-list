@@ -100,6 +100,7 @@ const taskSlice = createSlice({
             let tasks = [...state.tasks]
             tasks[taskIndex] = action.payload
             state.tasks = tasks
+
         },
         toggleIsDoneTask(state, action: PayloadAction<string>) {
             let taskIndex = state.tasks.findIndex(task => task.id === action.payload)

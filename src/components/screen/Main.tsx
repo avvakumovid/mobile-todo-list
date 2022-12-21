@@ -23,7 +23,7 @@ const Main: FC<DrawerScreenProps<any>> = ({ navigation }) => {
         What's up, Olivia!
       </Text>
       <CategoriesList />
-      <TasksList label="today's tasks" tasks={tasks} />
+      <TasksList label='all tasks' tasks={tasks} />
     </Layout>
   )
 }
