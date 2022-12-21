@@ -9,12 +9,13 @@ import TaskItem from './TaskItem'
 
 interface ITasksList {
   tasks: ITask[]
+  label: string
 }
 
-const TasksList: FC<ITasksList> = ({ tasks }) => {
+const TasksList: FC<ITasksList> = ({ tasks, label }) => {
   return (
     <>
-      <Label text="today's tasks" />
+      <Label text={label} />
       <ScrollView showsVerticalScrollIndicator={false}>
         {[...tasks].reverse().map((item, index) => (
           <TaskItem key={item.id} {...item} index={index} />

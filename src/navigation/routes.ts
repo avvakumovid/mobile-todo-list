@@ -4,6 +4,7 @@ import NewTask from './../components/screen/NewTask';
 import Category from './../components/screen/Category';
 import ColorPicker from '@/components/ui/color-picker/ColorPicker';
 import Task from '@/components/screen/Task';
+import TasksByCategory from '@/components/screen/TasksByCategory';
 
 
 export const DrawerRoute: IRoute[] = [
@@ -30,6 +31,11 @@ export const routes: IRoute[] = [
     {
         name: 'Task',
         component: Task,
+        icon: 'activity'
+    },
+    {
+        name: 'TasksByCategory',
+        component: TasksByCategory,
         icon: 'activity'
     },
     {
