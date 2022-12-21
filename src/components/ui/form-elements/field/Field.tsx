@@ -34,6 +34,8 @@ const Field = <T extends Record<string, any>>({
               onBlur={onBlur}
               value={(value || '').toString()}
               className='text-black text-2xl '
+              cursorColor='#cbd7fb'
+              selectionColor='#cbd7fb'
               {...rest}
             />
           </View>

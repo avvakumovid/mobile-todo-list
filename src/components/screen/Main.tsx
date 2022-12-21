@@ -13,6 +13,9 @@ import { groupTaskByCategory } from '@/store/slices/task.slice'
 
 const Main: FC<DrawerScreenProps<any>> = ({ navigation }) => {
   const { tasks } = useSelector((state: RootState) => state.task)
+  const {
+    user: { name },
+  } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
     dispatch(groupTaskByCategory())
@@ -20,7 +23,7 @@ const Main: FC<DrawerScreenProps<any>> = ({ navigation }) => {
   return (
     <Layout isPlusButton navigation={navigation}>
       <Text className='text-3xl text-black font-medium mb-4'>
-        What's up, Olivia!
+        What's up, {name}!
       </Text>
       <CategoriesList />
       <TasksList label='all tasks' tasks={tasks} />

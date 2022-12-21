@@ -12,6 +12,7 @@ export type TypeRootStackParamList = {
     TasksByCategory: {
         categoryId: string
     }
+    Auth: undefined
     Test: undefined
 }
 

@@ -1,9 +1,13 @@
 import { LinearGradient } from 'expo-linear-gradient'
-import React from 'react'
+import React, { FC } from 'react'
 import { Image, Text, View } from 'react-native'
 import * as Progress from 'react-native-progress'
 
-const Avatar = () => {
+interface IAvatar {
+  img: string
+}
+
+const Avatar: FC<IAvatar> = ({ img }) => {
   return (
     <View className='w-[90px] h-[90px] rounded-full bg-transparent justify-center items-center mb-8'>
       <Progress.Circle
@@ -16,7 +20,9 @@ const Avatar = () => {
       />
       <Image
         className='w-20 h-20 rounded-full absolute'
-        source={require('../../../../assets/avatar.png')}
+        source={{
+          uri: img,
+        }}
       />
     </View>
   )

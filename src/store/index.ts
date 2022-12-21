@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import taskReducer from './slices/task.slice'
 import categoryReducer from './slices/category.slice'
+import authReducer from './slices/auth.slice'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PURGE, PERSIST, REGISTER } from 'redux-persist'
 
@@ -12,7 +13,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     task: taskReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    auth: authReducer
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
