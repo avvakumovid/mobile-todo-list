@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["Datepicker", "Pressable", "reduxjs", "Timepicker"]
+  "cSpell.words": [
+    "Datepicker",
+    "persistor",
+    "Pressable",
+    "reduxjs",
+    "Timepicker"
+  ]
 }

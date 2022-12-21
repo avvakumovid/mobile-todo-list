@@ -1,16 +1,17 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import Navigation from './src/navigation/Navigation'
-import { store } from './src/store/index'
+import { persistor, store } from './src/store/index'
 
 export default function App() {
   return (
     <SafeAreaProvider className='bg-blue-200'>
       <Provider store={store}>
-        <Navigation />
+        <PersistGate persistor={persistor}>
+          <Navigation />
+        </PersistGate>
       </Provider>
     </SafeAreaProvider>
   )
