@@ -140,6 +140,16 @@ const taskSlice = createSlice({
             })
 
             state.taskByCategories = f
+        },
+        updateTaskByCategory(state, action: PayloadAction<ICategory>) {
+
+            let tasks = state.tasks.map(task => {
+                if (task.category.id === action.payload.id) {
+                    task.category = action.payload
+                }
+                return task
+            })
+            state.tasks = tasks
         }
     }
 })
@@ -147,6 +157,6 @@ const taskSlice = createSlice({
 
 export default taskSlice.reducer
 
-export const { addTask, removeTask, updateTask, toggleIsDoneTask, groupTaskByCategory } = taskSlice.actions
+export const { addTask, removeTask, updateTask, toggleIsDoneTask, groupTaskByCategory, updateTaskByCategory } = taskSlice.actions
 
 

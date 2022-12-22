@@ -13,6 +13,7 @@ import Select from '../../../select/Select'
 import { IEditCategory, IEditCategoryForm } from './edit-category.interface'
 import { AppDispatch } from '@/store'
 import { addCategory, editCategory } from '@/store/slices/category.slice'
+import { updateTaskByCategory } from '@/store/slices/task.slice'
 
 const EditCategory: FC<IEditCategory> = ({ category, setIsShow }) => {
   const [isNew, setIsNew] = useState(false)
@@ -33,6 +34,7 @@ const EditCategory: FC<IEditCategory> = ({ category, setIsShow }) => {
       dispatch(addCategory(data))
     } else {
       dispatch(editCategory(data))
+      dispatch(updateTaskByCategory(data))
       setIsShow(false)
     }
     setIsNew(false)
