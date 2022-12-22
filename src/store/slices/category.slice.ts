@@ -3,8 +3,6 @@ import { ICategory } from '@/shared/types';
 import { colors } from '@/shared/colors';
 
 
-
-
 export interface CategoryState {
     categories: ICategory[]
 }

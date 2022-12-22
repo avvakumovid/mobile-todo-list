@@ -1,7 +1,7 @@
 import { Feather } from '@expo/vector-icons'
 import cn from 'clsx'
 import { FC, useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   Layout,
@@ -86,6 +86,7 @@ const TaskItem: FC<ITaskItem> = ({
   const x = useSharedValue(0)
   const time = async (x: SharedValue<number>) => {
     let timer = setTimeout(() => {
+
       dispatch(removeTask(id))
       dispatch(groupTaskByCategory())
     }, 1000)

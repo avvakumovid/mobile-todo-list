@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from 'react'
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import Animated, {
   FadeInLeft,
   FadeInRight,
@@ -12,6 +12,7 @@ import { ICategory } from '@/shared/types'
 import Button from './../../button/Button'
 import { AppDispatch } from '@/store'
 import { removeCategory } from '@/store/slices/category.slice'
+import { deleteTasksByCategories } from '@/store/slices/task.slice'
 
 interface iCategoryItem {
   category: ICategory
@@ -21,6 +22,7 @@ interface iCategoryItem {
 
 const CategoryItem: FC<iCategoryItem> = ({ category, index, setEdit }) => {
   const dispatch = useDispatch<AppDispatch>()
+
   return (
     <Animated.View
       entering={FadeInLeft.duration(index * 100 + 100)}
@@ -59,7 +61,24 @@ const CategoryItem: FC<iCategoryItem> = ({ category, index, setEdit }) => {
           size={18}
           icon='trash'
           onPress={() => {
-            dispatch(removeCategory(category.id))
+            Alert.alert(
+              'Deleting category',
+              'If you delete category all tasks from this category will be delete',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => {},
+                  style: 'cancel',
+                },
+                {
+                  text: 'OK',
+                  onPress: () => {
+                    dispatch(removeCategory(category.id))
+                    dispatch(deleteTasksByCategories(category.id))
+                  },
+                },
+              ]
+            )
           }}
         />
       </View>

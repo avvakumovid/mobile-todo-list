@@ -150,6 +150,11 @@ const taskSlice = createSlice({
                 return task
             })
             state.tasks = tasks
+        },
+        deleteTasksByCategories(state, action: PayloadAction<string>) {
+            let tasks = state.tasks.filter(task => task.category.id !== action.payload)
+            state.tasks = tasks
+            console.log('sdsa')
         }
     }
 })
@@ -157,6 +162,6 @@ const taskSlice = createSlice({
 
 export default taskSlice.reducer
 
-export const { addTask, removeTask, updateTask, toggleIsDoneTask, groupTaskByCategory, updateTaskByCategory } = taskSlice.actions
+export const { addTask, removeTask, updateTask, toggleIsDoneTask, groupTaskByCategory, updateTaskByCategory, deleteTasksByCategories } = taskSlice.actions
 
 
