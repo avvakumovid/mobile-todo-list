@@ -10,8 +10,6 @@ import {
 } from 'react-hook-form'
 import { Image, Text, View } from 'react-native'
 
-import ava from '../../../../../assets/avatar.png'
-
 import RippleButton from './../../button/RippleButton'
 
 interface ImagePickerControl<T extends FieldValues> {
@@ -28,7 +26,7 @@ const ImagePickerControl = <T extends Record<string, any>>({
   name,
   rules,
 }: ImagePickerControl<T>) => {
-  const [image, setImage] = useState<string>('')
+  const [image, setImage] = useState<string>()
 
   const pickImage = async (onChange: (...event: any[]) => void) => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -67,7 +65,7 @@ const ImagePickerControl = <T extends Record<string, any>>({
           {error && <Text className='text-red'>{error?.message}</Text>}
           {image && (
             <Image
-              source={{ uri: image }}
+              source={{ uri: image ?? 'https://i.pravatar.cc/300' }}
               style={{ width: 200, height: 200 }}
               className='rounded-lg'
             />

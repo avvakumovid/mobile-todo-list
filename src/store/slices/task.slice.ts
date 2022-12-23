@@ -3,77 +3,6 @@ import { ICategory, ITask, ITasksByCategoryItem } from './../../shared/types';
 import { categories } from './category.slice';
 
 
-const date = new Date().toString()
-
-export const data: ITasksByCategoryItem[] = [
-    {
-        id: '1',
-        count: 40,
-        progress: 0.74,
-        category: categories[0]
-    },
-    {
-        id: '2',
-        count: 18,
-        progress: 0.2,
-        category: categories[1]
-    },
-    {
-        id: '3',
-        count: 18,
-        progress: 0.2,
-        category: categories[3]
-    },
-    {
-        id: '4',
-        count: 18,
-        progress: 0.2,
-        category: categories[2]
-    },
-    {
-        id: '5',
-        count: 18,
-        progress: 0.2,
-        category: categories[5]
-    },
-    {
-        id: '6',
-        count: 18,
-        progress: 0.2,
-        category: categories[4]
-    },
-]
-export const tasks: ITask[] = [
-    {
-        id: '1',
-        category: categories[0],
-        isDone: true,
-        task: 'First view',
-        date
-    },
-    {
-        id: '2',
-        category: categories[1],
-        isDone: false,
-        task: 'Second test task view Second test task view',
-        date
-    },
-    {
-        id: '3',
-        category: categories[1],
-        isDone: false,
-        task: 'Second test task view Second test task view',
-        date
-    },
-
-    {
-        id: '4',
-        category: categories[1],
-        isDone: true,
-        task: 'Second test task view Second test task view',
-        date
-    },
-]
 
 export interface TaskState {
     tasks: ITask[]
@@ -81,8 +10,8 @@ export interface TaskState {
 }
 
 const initialState: TaskState = {
-    tasks: tasks,
-    taskByCategories: data
+    tasks: [],
+    taskByCategories: []
 }
 
 const taskSlice = createSlice({
@@ -154,7 +83,7 @@ const taskSlice = createSlice({
         deleteTasksByCategories(state, action: PayloadAction<string>) {
             let tasks = state.tasks.filter(task => task.category.id !== action.payload)
             state.tasks = tasks
-            console.log('sdsa')
+
         }
     }
 })

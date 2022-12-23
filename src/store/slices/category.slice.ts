@@ -11,33 +11,14 @@ export const categories: ICategory[] = [
     {
         id: '1',
         name: 'business',
-        color: colors[1],
+        color: colors[0],
     },
     {
         id: '2',
         name: 'personal',
-        color: colors[28],
+        color: colors[1],
     },
-    {
-        id: '3',
-        name: '2ff211',
-        color: colors[32],
-    },
-    {
-        id: '4',
-        name: 'd44211',
-        color: colors[22],
-    },
-    {
-        id: '5',
-        name: '896bff',
-        color: colors[40],
-    },
-    {
-        id: '6',
-        name: 'personal',
-        color: colors[7],
-    },
+
 ]
 
 const initialState = {

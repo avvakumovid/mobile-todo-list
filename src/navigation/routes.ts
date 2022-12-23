@@ -14,7 +14,7 @@ export const DrawerRoute: IRoute[] = [
         icon: 'home'
     },
     {
-        name: 'Category',
+        name: 'Categories',
         component: Category,
         icon: 'archive'
     },
