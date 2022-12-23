@@ -32,7 +32,13 @@ const Login: FC<DrawerScreenProps<any>> = ({ navigation }) => {
           placeholder='Enter the name...'
         />
         <Label text='Avatar' />
-        <ImagePickerControl control={control} name='pictures' />
+        <ImagePickerControl
+          rules={{
+            required: "Avatar can't be Empty",
+          }}
+          control={control}
+          name='pictures'
+        />
       </View>
       <RippleButton
         icon='save'

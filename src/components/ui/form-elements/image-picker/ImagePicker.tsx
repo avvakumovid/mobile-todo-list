@@ -8,7 +8,9 @@ import {
   RegisterOptions,
   UseFormSetValue,
 } from 'react-hook-form'
-import { Image, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
+
+import ava from '../../../../../assets/avatar.png'
 
 import RippleButton from './../../button/RippleButton'
 
@@ -26,7 +28,7 @@ const ImagePickerControl = <T extends Record<string, any>>({
   name,
   rules,
 }: ImagePickerControl<T>) => {
-  const [image, setImage] = useState<string>()
+  const [image, setImage] = useState<string>('')
 
   const pickImage = async (onChange: (...event: any[]) => void) => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -46,7 +48,7 @@ const ImagePickerControl = <T extends Record<string, any>>({
       control={control}
       rules={rules}
       name={name}
-      render={({ field: { onChange } }) => (
+      render={({ field: { onChange }, fieldState: { error } }) => (
         <View
           className='justify-between items-start flex-row py-2  w-full'
           style={{
@@ -62,6 +64,7 @@ const ImagePickerControl = <T extends Record<string, any>>({
             borderColor='#cbd7fb'
             width={110}
           />
+          {error && <Text className='text-red'>{error?.message}</Text>}
           {image && (
             <Image
               source={{ uri: image }}
